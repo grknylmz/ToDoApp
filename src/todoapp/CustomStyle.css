@@ -1,0 +1,11 @@
+.root{
+    -fx-spacing: 30;
+    -fx-background-color: lightyellow;
+    -fx-padding: 20;
+}
+
+.button{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-color: lightskyblue;
+}

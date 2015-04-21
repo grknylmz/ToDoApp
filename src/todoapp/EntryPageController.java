@@ -1,6 +1,5 @@
 package todoapp;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,15 +38,16 @@ public class EntryPageController extends ToDoApp implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-            loginButton.setOnAction((actionEvent) -> {
+        loginButton.setOnAction((actionEvent) -> {
             try {
                 Parent homePageParent = FXMLLoader.load(getClass().getResource("FXMLHomePage.fxml"));
                 Scene homePageScene = new Scene(homePageParent);
                 Stage appStage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
 
                 if(isValidCredentials()){
-                appStage.setScene(homePageScene);
-                appStage.show();
+                    appStage.hide();
+                    appStage.setScene(homePageScene);
+                    appStage.show();
                 }
                 else{
                     usernameBox.clear();
@@ -79,10 +79,9 @@ public class EntryPageController extends ToDoApp implements Initializable {
             System.out.println("Opened Database Successfully");
             statement = c.createStatement();
 
-            ResultSet rs = statement.executeQuery("SELECT * FROM Users WHERE username= " +
-                    usernameBox.getText() + "'" + "AND password=" + "'" + passwordBox.getText() + "'");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Users WHERE username= " +"'"+
+                    usernameBox.getText()+ "'" + "AND password=" + "'" + passwordBox.getText() + "'");
             while (rs.next()){
-                System.out.println(rs);
                 if(rs.getString("username") != null && rs.getString("password") != null ){
                     String userName= rs.getString("username");
                     System.out.println("username=" + userName);
@@ -102,6 +101,7 @@ public class EntryPageController extends ToDoApp implements Initializable {
         }
 
         System.out.print("Operation done succesfully");
+        return letIn;
 
     }
 
